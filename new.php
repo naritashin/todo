@@ -10,6 +10,6 @@
     <input type="text" name="todo">
     <input type="submit" value="作成">
   </form>
-  <a href="index.html">一覧にもどる</a>
+  <a href="index.php">一覧にもどる</a>
 </body>
 </html>
