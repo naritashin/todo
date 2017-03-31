@@ -8,10 +8,14 @@ function checkReferer() {
 }
 
 function transition($path) {
+  unsetSession();
   $data = $_POST;
+  if (isset($data['todo'])) $res = validate($data['todo']);
   if($path === '/index.php' && $data['type'] === 'delete') {
     deleteData($data['id']);
     return 'index';
+  } elseif(!$res || !empty($_SESSION['err'])){
+    return 'back';
   } elseif($path === '/new.php') {
     create($data);
   } elseif($path === '/edit.php'){
@@ -39,6 +43,10 @@ function checkToken($data) {
 
 function unsetSession() {
   if(!empty($_SESSION['err'])) $_SESSION['err'] = '';
+}
+
+function validate($data) {
+  return $res = $data != "" ? true : $_SESSION['err'] = '入力がありません';
 }
 
 function create($data) {
