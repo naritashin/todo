@@ -48,4 +48,12 @@ class TodoController extends Controller
 
     return redirect()->to('todo');
   }
+
+  public function destroy($id)
+  {
+    $data = $this->todo->find($id);
+    $data->delete();
+
+    return redirect()->to('todo');
+  }
 }
