@@ -14,6 +14,7 @@ class TodoController extends Controller
   {
     $this->todo = $todo;
   }
+
   public function index()
   {
     $todos = $this->todo->all();
@@ -30,6 +31,20 @@ class TodoController extends Controller
     $input = $request->all();
     $this->todo->fill($input);
     $this->todo->save();
+
+    return redirect()->to('todo');
+  }
+
+  public function edit($id)
+  {
+    $todo = $this->todo->find($id);
+    return view('todo.edit')->with(compact('todo'));
+  }
+
+  public function update(Request $request, $id)
+  {
+    $input = $request->all();
+    $this->todo->where('id', $id)->update(['title' => $input['title']]);
 
     return redirect()->to('todo');
   }
