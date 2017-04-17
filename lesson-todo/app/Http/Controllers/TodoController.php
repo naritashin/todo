@@ -20,4 +20,18 @@ class TodoController extends Controller
     $todos = $this->todo->all();
     return view('todo.index', compact('todos'));
   }
+
+  public function create()
+  {
+    return view('todo.create');
+  }
+
+  public function store(Request $request)
+  {
+    $input = $request->all();
+    $this->todo->fill($input);
+    $this->todo->save();
+
+    return redirect()->to('todo');
+  }
 }
